@@ -22,14 +22,14 @@ function calculateParts(parts) {
       numbers.push(Number(subParts[i]));
 
       if (operators[operators.length - 1] == "*") {
-        const l1 = numbers.pop();
-        const l2 = numbers.pop();
-        numbers.push(l1 * l2);
+        const rightNumber = numbers.pop();
+        const leftNumber = numbers.pop();
+        numbers.push(leftNumber * rightNumber);
         operators.pop();
       } else if (operators[operators.length - 1] == "/") {
-        const l1 = numbers.pop();
-        const l2 = numbers.pop();
-        numbers.push(l1 / l2);
+        const rightNumber = numbers.pop();
+        const leftNumber = numbers.pop();
+        numbers.push(leftNumber / rightNumber);
         operators.pop();
       }
     }
@@ -61,7 +61,17 @@ function calculateCorrectEquations(str) {
   return `${counter}/${parts.length - 1}`;
 }
 
-const input1 = "3 + 2 = 5";
-const input2 = "7 - 3 * 2 + 1 = 4 * 2 + 1 = 8 + 1 = 9";
-console.log(calculateCorrectEquations(input1));
-console.log(calculateCorrectEquations(input2));
+function testBonusTask() {
+  const tests = [
+    "3 + 2 = 5",
+    "7 - 3 * 2 + 1 = 4 * 2 + 1 = 8 + 1 = 9",
+    "8 / 2 = 4",
+  ];
+  const expectedResults = ["1/1", "2/3", "1/1"];
+
+  return tests.every((test, i) => {
+    return calculateCorrectEquations(test) === expectedResults[i];
+  });
+}
+
+console.log(testBonusTask());

@@ -5,15 +5,15 @@ var bracketsRegex = /\([^()]+\)/g;
 
 function calculateExpression(expression) {
   const parts = expression.split(" ");
-  const n1 = Number(parts[0]);
-  const n2 = Number(parts[2]);
+  const leftNumber = Number(parts[0]);
+  const rightNumber = Number(parts[2]);
   const operator = parts[1];
 
   switch (operator) {
-    case "*": return n1 * n2;
-    case "/": return n1 / n2;
-    case "+": return n1 + n2;
-    case "-": return n1 - n2;
+    case "*": return leftNumber * rightNumber;
+    case "/": return leftNumber / rightNumber;
+    case "+": return leftNumber + rightNumber;
+    case "-": return leftNumber - rightNumber;
     default: return 0;
   }
 }
@@ -61,9 +61,24 @@ function calculateCorrectEquations(str) {
   return `${counter}/${parts.length - 1}`;
 }
 
-const input1 = "3 + 2 = 5";
-const input2 = "7 - 3 * 2 + 1 = 4 * 2 + 1 = 8 + 1 = 9";
-const input3 = "((1 + 5) * 4) * 2 / 6 + 2 - 3 = 7 = 1";
-console.log(calculateCorrectEquations(input1));
-console.log(calculateCorrectEquations(input2));
-console.log(calculateCorrectEquations(input3));
+function testBonusTask() {
+  const tests = [
+    "3 + 2 = 5",
+    "7 - 3 * 2 + 1 = 4 * 2 + 1 = 8 + 1 = 9",
+    "((1 + 5) * 4) * 2 / 6 + 2 - 3 = 7 = 1",
+    "8 / 2 = 4",
+  ];
+
+  const expectedResults = [
+    "1/1",
+    "2/3",
+    "1/2",
+    "1/1",
+  ];
+
+  return tests.every((test, i) => {
+    return calculateCorrectEquations(test) === expectedResults[i];
+  });
+}
+
+console.log(testBonusTask());
