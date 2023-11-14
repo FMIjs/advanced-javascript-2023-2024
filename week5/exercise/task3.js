@@ -11,8 +11,7 @@ const server = http.createServer(function (req, res) {
       throw new Error("Invalid or empty url.");
     }
 
-    const decodedUrl = decodeURIComponent(requestedUrl);
-    https.get(decodedUrl, function (externalResponse) {
+    https.get(requestedUrl, function (externalResponse) {
       externalResponse.pipe(res);
     });
   }
