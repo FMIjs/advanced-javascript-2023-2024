@@ -7,7 +7,15 @@ const localDb = {
 };
 
 const server = http.createServer(function(req, res) {
-  const { pathname } = url.parse(req.url, true);
+  const parsedUrl = url.parse(req.url, true);
+  const pathname = parsedUrl.pathname;
+
+  if (!pathname.startsWith('/load')) {
+    res.statusCode = 404;
+    res.write("Not found!")
+    res.end();
+    return;
+  }
 
   const desiredProp = (pathname.match(/\/load\/([a-zA-Z]+)/) || [null, null])[1];
   const result = localDb[desiredProp || ''];
