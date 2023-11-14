@@ -40,9 +40,9 @@ function fetchTemplateHandler(fileName, params, res) {
         );
       });
 
-      const partialInterpolationMatch = chunkString.match(
+      const partialInterpolationMatch = (chunkString.match(
         partialInterpolationRegEx
-      )[0]; // the chunk ends with something like "{{nam"
+      ) || [])[0]; // the chunk ends with something like "{{nam"
       if (partialInterpolationMatch) {
         partialInterpolationFromLastChunk = partialInterpolationMatch;
         // we take this partial match and save it for the next chunk.
