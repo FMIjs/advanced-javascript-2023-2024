@@ -12,4 +12,4 @@
     - **GET** /event/:id/booking/:bookingId -- връща данните за конкретен гост на даденото събитие;
     - **DELETE** /event/:id/booking/:bookingId -- изтива данните за конкретен гост на даденото събитие;
 
-  Като "база данни" може да използвате [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). 
+      Като "база данни" може да използвате [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map). 
