@@ -53,7 +53,6 @@
 // const myNewObjArray = [...obj];
 // console.log(myNewObj, myNewObjArray);
 
-
 const obj = {
   a: 1,
   b: 2,
