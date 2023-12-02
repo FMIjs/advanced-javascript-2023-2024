@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>My first heading</h1>
+    <ul id="my-list">
+      <li class="my-list-item">my first item</li>
+      <li class="my-list-item">my second item</li>
+    </ul>
+    <form id="my-form">
+      <input type="text" />
+      <button id="add-button" type="button">Add</button>
+    </form>
+    <script>
+      function queryAll(selector) {
+        return Array.from(document.querySelectorAll(selector));
+      }
+      function queryOne(selector) {
+        return queryAll(selector)[0];
+      }
+      const myList = queryOne("#my-list");
+      const formBtn = queryOne("#add-button");
+
+      formBtn.addEventListener("click", (event) => {
+        const { target } = event;
+        const input = target.previousElementSibling;
+        const { value } = input;
+        input.value = "";
+        const myNewLi = document.createElement("li");
+        myNewLi.innerText = value;
+        myList.appendChild(myNewLi);
+      });
+    </script>
+  </body>
+</html>
