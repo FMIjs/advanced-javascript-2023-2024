@@ -1,0 +1,10 @@
+<%- include('partials/header'); %>
+
+<h1>
+  <%= message %>
+</h1>
+<% users.forEach((user)=> { %>
+  <span>I am <%= user %></span>
+<%}); %>
+
+<%- include('partials/footer'); %>
