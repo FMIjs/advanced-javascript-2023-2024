@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script async defer src="/main.js"></script>
+    <script>
+      var anchor = "<%= anchor %>";
+    </script>
+  </head>
+  <body>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+    </nav>
+    <h1>HOME</h1>
+    <ul>
+      <% users.forEach(function(user){ %>
+      <li><%= user.firstName %></li>
+      <% }); %>
+    </ul>
+    <form action="/" method="POST">
+      <div class="form-group">
+        <label for="first-name"></label>
+        <input
+          id="first-name"
+          type="text"
+          name="firstName"
+          value="<%= firstName %>"
+        />
+        <% if (error) { %>
+        <div class="error"><%= error %></div>
+        <% } %>
+      </div>
+      <button>Send</button>
+    </form>
+  </body>
+</html>
