@@ -17,7 +17,7 @@ app.use("/api", apiRouter);
 app.get("*", (req, res) => {
   if (req.url === '/favicon.ico') return res.status(404).end();
   res.sendFile(path.resolve("./public/index.html"));
-})
+});
 
 // app.post("/", (req, res) => {
 //   let { firstName } = req.body;
