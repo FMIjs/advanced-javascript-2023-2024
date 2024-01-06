@@ -37,9 +37,9 @@
     // const ul = document.createElement('ul');
     // const submitButton = document.createElement("button");
     // const loader = document.createElement("div");
-    loader.textContent = "Loading...";
-    loader.style.visibility = 'hidden';
-    outlet.appendChild(loader);
+    // loader.textContent = "Loading...";
+    // loader.style.visibility = 'hidden';
+    // outlet.appendChild(loader);
 
     function createErrorDiv(errorMessage) {
       const div = document.createElement('div');
@@ -48,48 +48,40 @@
       return div;
     }
 
-    submitButton.textContent = "Save";
-    input.name = "firstName";
-    input.placeholder = "First name"
+    // submitButton.textContent = "Save";
+    // input.name = "firstName";
+    // input.placeholder = "First name"
 
-    form.appendChild(input);
-    form.appendChild(submitButton);
+    // form.appendChild(input);
+    // form.appendChild(submitButton);
     // outlet.appendChild(ul);
-    outlet.appendChild(form);
+    // outlet.appendChild(form);
     renderAllUsers();
 
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      if (errMsg) { errMsg.remove(); }
-      // event.stopPropagation();
-      // event.stopImmediatePropagation();
-
-      const firstName = input.value;
-      if (firstName.length < 3) {
-        errMsg = createErrorDiv('first name < 3');
-        form.appendChild(errMsg);
-        return;
-      }
-
-      loader.style.visibility = 'visible';
-      createUser({ firstName }).then(() => renderAllUsers());
-    });
-
-    function createUserLi(user) {
-      const li = document.createElement('li');
-      li.textContent = user.firstName;
-      li.setAttribute("data-id", user.id);
-      ul.appendChild(li);
-      loader.style.visibility = 'hidden';
-      input.value = '';
-    }
-
     function renderAllUsers() {
-      // ul.innerHTML = '';
       return getAllUsers().then(users => {
         const result = renderTemplate({ users });
         outlet.innerHTML = result;
-        // users.forEach(user => createUserLi(user));
+        const form = outlet.querySelector('#form');
+        const input = outlet.querySelector('#input');
+
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          if (errMsg) { errMsg.remove(); }
+          // event.stopPropagation();
+          // event.stopImmediatePropagation();
+
+          const firstName = input.value;
+          if (firstName.length < 3) {
+            errMsg = createErrorDiv('first name < 3');
+            form.appendChild(errMsg);
+            return;
+          }
+
+          loader.style.visibility = 'visible';
+          createUser({ firstName }).then(() => renderAllUsers());
+        });
+
       });
     }
 

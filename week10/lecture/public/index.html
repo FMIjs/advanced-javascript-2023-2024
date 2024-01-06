@@ -11,7 +11,8 @@
         <li><%= user.firstName %></li>
         <% }); %>
       </ul>
-      <form><input name="firstName" placeholder="First name"><button>Save</button></form>
+      <div id="loader" style="visibility: hidden">Loading...</div>
+      <form id="form"><input id="input" name="firstName" placeholder="First name"><button id="button">Save</button></form>
     </script>
     <script async defer src="/single-page-app.js"></script>
   </head>
