@@ -4,6 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="https://unpkg.com/ejs@3.1.9/ejs.min.js"></script>
+    <script type="text/template" id="myEJSTemplate">
+      <ul>
+        <% users.forEach(function(user){ %>
+        <li><%= user.firstName %></li>
+        <% }); %>
+      </ul>
+      <div id="loader" style="visibility: hidden">Loading...</div>
+      <form id="form"><input id="input" name="firstName" placeholder="First name"><button id="button">Save</button></form>
+    </script>
     <script async defer src="/single-page-app.js"></script>
   </head>
   <body>
