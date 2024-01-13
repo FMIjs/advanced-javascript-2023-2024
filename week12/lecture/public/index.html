@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- <script src="app.js" type="module" async defer></script> -->
+    <script src="https://unpkg.com/@vaadin/router/dist/vaadin-router.umd.min.js"></script>
+    <script>
+      var Router = Vaadin.Router;
+    </script>
+  </head>
+  <body>
+    <a href="/">Home</a>
+    <a href="/users">Users</a>
+    <div id="outlet"></div>
+
+    <script>
+      // import {Router} from '@vaadin/router'; // for Webpack / Polymer CLI
+      // const Router = Vaadin.Router; // for vaadin-router.umd.js
+
+      // select the DOM node where the router inserts route Web Components
+      const outlet = document.getElementById("outlet");
+      const router = new Router(outlet);
+
+      class Home extends HTMLElement {
+        #shadowRoot;
+        constructor() {
+          super();
+          this.#shadowRoot = this.attachShadow({ mode: "closed" });
+          const div = document.createElement("div");
+          div.innerHTML = "HOME PAGE";
+          this.#shadowRoot.appendChild(div);
+        }
+      }
+      customElements.define("app-home", Home);
+
+      class Users extends HTMLElement {
+        #shadowRoot;
+        constructor() {
+          super();
+          this.#shadowRoot = this.attachShadow({ mode: "closed" });
+          const div = document.createElement("div");
+          div.innerHTML = "USERS PAGE";
+          this.#shadowRoot.appendChild(div);
+        }
+      }
+      customElements.define("app-users", Users);
+
+      router.setRoutes([
+        { path: "/", component: "app-home" },
+        { path: "/users", component: "app-users" },
+      ]);
+    </script>
+  </body>
+</html>
