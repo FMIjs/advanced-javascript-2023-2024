@@ -17,3 +17,15 @@ export function createContextForComponent(cmp, defaultValues = {}) {
     }
   })
 }
+
+export function withContext(initialContext) {
+  return function (klass, desc) {
+    if (desc.kind !== 'class') throw new Error("Decorator withContext can only be applied on classes!");
+    return class extends klass {
+      constructor() {
+        super();
+        this.context = createContextForComponent(this, initialContext);
+      }
+    }
+  }
+}

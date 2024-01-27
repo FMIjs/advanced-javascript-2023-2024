@@ -1,15 +1,19 @@
 import { render, html } from "lit-html";
-import { createContextForComponent } from "./context";
-import { store } from './store'; 
+import { serverFetch } from './utils/server-fetch';
+import { store } from './store';
+import { withContext } from './decoratrs/with-context'
 
+@withContext({ isLoading: false, error: null })
 export class AppLogin extends HTMLElement {
   static selector = "app-login";
   #showRoot = null;
-  context = createContextForComponent(this, { isLoading: false, error: null });
 
   constructor() {
     super();
     this.#showRoot = this.attachShadow({ mode: "closed" });
+  }
+
+  connectedCallback() {
     this.render();
   }
 
@@ -22,14 +26,14 @@ export class AppLogin extends HTMLElement {
     }, {});
     this.context.isLoading = true;
     this.context.error = "";
-    fetch("http://localhost:8000/login", {
-      method: "post",
-      body: JSON.stringify(data),
-      headers: { "content-type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then(({ token }) => {
+    serverFetch('/login', { body: data })
+      .then(({ ok, data }) => {
         this.context.isLoading = false;
+        if (!ok) {
+          this.context.error = data.error.message;
+          return;
+        }
+        const { token } = data;
         if (!token) {
           return (this.context.error = "Wrong email or password!");
         }
@@ -38,10 +42,6 @@ export class AppLogin extends HTMLElement {
         window.dispatchEvent(
           new CustomEvent("vaadin-router-go", { detail: { pathname: "/users" } })
         );
-      })
-      .catch(() => {
-        this.context.isLoading = false;
-        this.context.error = "Failed to fetch!";
       });
   }
 
@@ -58,7 +58,7 @@ export class AppLogin extends HTMLElement {
         </div>
         <button .disabled=${this.context.isLoading}>Login</button>
         ${this.context.error &&
-        html`<div class="error">${this.context.error}</div>`}
+      html`<div class="error">${this.context.error}</div>`}
       </form>
     `;
   }

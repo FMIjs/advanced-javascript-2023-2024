@@ -1,19 +1,19 @@
 import { render, html } from 'lit-html';
-import { createContextForComponent } from "./context";
 import { store } from './store';
+import { withContext } from './decoratrs/with-context';
 
+@withContext({ isLoading: false, error: null, users: null })
 export class AppUsers extends HTMLElement {
   static selector = 'app-users';
   #showRoot = null;
-  context = createContextForComponent(this, { isLoading: false, error: null, users: null });
 
   constructor() {
     super();
     this.#showRoot = this.attachShadow({ mode: 'closed' });
-    this.render();
   }
-  
+
   connectedCallback() {
+    this.render();
     if (!store.authToken) {
       return void window.dispatchEvent(
         new CustomEvent("vaadin-router-go", { detail: { pathname: "/" } })
@@ -21,7 +21,7 @@ export class AppUsers extends HTMLElement {
     }
     this.fetchUsers();
   }
-  
+
   fetchUsers() {
     this.context.isLoading = true;
     this.context.error = '';
