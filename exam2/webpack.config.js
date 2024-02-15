@@ -14,6 +14,7 @@ module.exports = {
     extensions: ['.js'] // Automatically resolve this extensions
   },
   mode: 'development',
+  devtool: "source-map",
   module: {
     rules: [
       {
