@@ -22,6 +22,7 @@
     "ps-list": "^6.3.0",
     "ps-node": "^0.1.6",
     "socketio": "^1.0.0",
+    "socket.io": "^4.7.4",
     "webpack": "^5.90.2",
     "webpack-cli": "^5.1.4"
   },
