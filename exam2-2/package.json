@@ -1,0 +1,16 @@
+{
+  "name": "js-advanced-exam-2-2022",
+  "version": "1.0.0",
+  "description": "JS Advanced 2021/2022 - Exam 2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2"
+  }
+}
